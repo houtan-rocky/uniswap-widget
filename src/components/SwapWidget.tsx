@@ -5,9 +5,14 @@ import { DEFAULT_POOL_CONFIG } from "../config/tokens";
 import { SwapState, SwapProps, lightTheme, ThemeConfig } from "../types";
 import useQuote from "../hooks/useQuote";
 import useSwap from "../hooks/useSwap";
-import { IoMdArrowDown } from "react-icons/io";
 import { useAppKit } from "@reown/appkit/react";
 import { twMerge } from "tailwind-merge";
+
+const ArrowDown = (props: any) => (
+  <svg {...props} viewBox="0 0 512 512" className="text-2xl w-6 h-6" fill="currentColor">
+    <path d="M256 400L56 200h400L256 400z"/>
+  </svg>
+)
 
 const SwapWidget: React.FC<SwapProps> = ({
   poolConfig = DEFAULT_POOL_CONFIG,
@@ -184,7 +189,7 @@ const SwapWidget: React.FC<SwapProps> = ({
             opacity: !isConnected ? 0.5 : 1
           }}
         >
-          <IoMdArrowDown className="text-2xl" style={{ color: theme.text }} />
+          <ArrowDown className="text-2xl" style={{ color: theme.text }} />
         </div>
       </div>
 
