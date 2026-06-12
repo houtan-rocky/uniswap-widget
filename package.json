@@ -1,7 +1,7 @@
 {
   "name": "react-uniswap",
   "private": false,
-  "version": "1.0.27",
+  "version": "1.0.28",
   "type": "module",
   "description": "A clean Uniswap swap widget package for easy integration",
   "main": "./dist/index.umd.js",
@@ -26,7 +26,12 @@
     "preview": "vite preview"
   },
   "keywords": [
-    "uniswap", "swap", "widget", "defi", "react", "ethereum"
+    "uniswap",
+    "swap",
+    "widget",
+    "defi",
+    "react",
+    "ethereum"
   ],
   "peerDependencies": {
     "@reown/appkit": ">=1.4.0",
@@ -37,9 +42,6 @@
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
     "wagmi": ">=2.0.0"
-  },
-  "dependencies": {
-    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

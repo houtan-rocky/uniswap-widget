@@ -6,7 +6,9 @@ import { SwapState, SwapProps, lightTheme, ThemeConfig } from "../types";
 import useQuote from "../hooks/useQuote";
 import useSwap from "../hooks/useSwap";
 import { useAppKit } from "@reown/appkit/react";
-import { twMerge } from "tailwind-merge";
+
+const cx = (...classes: (string | false | null | undefined)[]) =>
+  classes.filter(Boolean).join(" ");
 
 const ArrowDown = (props: any) => (
   <svg {...props} viewBox="0 0 512 512" className="text-2xl w-6 h-6" fill="currentColor">
@@ -137,7 +139,7 @@ const SwapWidget: React.FC<SwapProps> = ({
             disabled={!isConnected}
             value={state.inputAmount}
             onChange={handleInputAmountChange}
-            className={twMerge(
+            className={cx(
               "w-full text-2xl outline-none",
               !isConnected && "cursor-not-allowed bg-gray-100"
             )}
@@ -150,7 +152,7 @@ const SwapWidget: React.FC<SwapProps> = ({
           />
           <div className="flex flex-col gap-2">
             <div
-              className={twMerge(
+              className={cx(
                 "ml-2 p-3 py-2 rounded-full flex items-center justify-center gap-2 min-w-[140px]",
                 !isConnected && "opacity-50"
               )}
@@ -213,7 +215,7 @@ const SwapWidget: React.FC<SwapProps> = ({
             }
             readOnly
             disabled={true}
-            className={twMerge(
+            className={cx(
               "w-full text-2xl outline-none disabled:text-lg",
               !isConnected && "cursor-not-allowed bg-gray-100"
             )}
@@ -226,7 +228,7 @@ const SwapWidget: React.FC<SwapProps> = ({
           />
           <div className="flex flex-col gap-2">
             <div
-              className={twMerge(
+              className={cx(
                 "ml-2 p-3 py-2 rounded-full flex items-center justify-center gap-2 min-w-[140px]",
                 !isConnected && "opacity-50"
               )}
