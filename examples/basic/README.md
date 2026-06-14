@@ -1,6 +1,6 @@
 # @examples/basic
 
-A minimal, runnable app that consumes the [`react-uniswap`](../../packages/react-uniswap) widget exactly the way a real downstream app would — it depends on `react-uniswap` via `workspace:*` and imports the widget from its public entry point.
+A minimal, runnable app that consumes the [`@uniswap-widget/react`](../../packages/react-uniswap) widget exactly the way a real downstream app would — it depends on `@uniswap-widget/react` via `workspace:*` and imports the widget from its public entry point.
 
 This example doubles as the **reference implementation of the host-app contract**: it provides the Tailwind setup, the API proxy, and the Vite env the widget expects.
 

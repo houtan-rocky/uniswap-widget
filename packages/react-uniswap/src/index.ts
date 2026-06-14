@@ -25,7 +25,7 @@ export {
 } from "@reown/appkit/networks";
 
 // Constants — re-exported from the framework-agnostic core so the public API
-// of `react-uniswap` is unchanged for consumers.
+// of `@uniswap-widget/react` is unchanged for consumers.
 export {
   VIRTUAL_PROTOCOL_TOKEN,
   DEFAULT_SLIPPAGE,

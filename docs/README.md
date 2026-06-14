@@ -1,7 +1,12 @@
 # Specs
 
-Design records for the `react-uniswap` monorepo. Each spec is a short, dated
+Design records for the `@uniswap-widget` monorepo. Each spec is a short, dated
 decision record (Status / Context / Decision / Consequences).
+
+> **Note:** ADRs 0001–0004 are dated records of the original single-package →
+> monorepo work (when the widget was published as `react-uniswap`) and the
+> *proposed* core decoupling. The core/React/Vue split has since shipped under
+> the `@uniswap-widget/*` names; those historical references are left as-is.
 
 | # | Spec | Status |
 |---|------|--------|

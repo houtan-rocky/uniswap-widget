@@ -7,7 +7,7 @@ import {
   base,
   type TokenInfo,
   type ThemeConfig,
-} from "react-uniswap";
+} from "@uniswap-widget/react";
 import { QueryClient } from "@tanstack/react-query";
 
 const SOLACE_TOKEN = {
@@ -57,7 +57,7 @@ createAppKit({
   projectId,
   themeMode: "dark",
   metadata: {
-    name: "react-uniswap",
+    name: "@uniswap-widget/react",
     description: "A clean, embeddable Uniswap swap widget",
     url: import.meta.env.VITE_APP_URL || "https://uniswap.org",
     icons: ["https://avatars.githubusercontent.com/u/179229932"],
@@ -132,10 +132,10 @@ const App: React.FC = () => {
           <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[#FF007A] to-[#7c3aed] text-lg font-black shadow-lg shadow-[#FF007A]/30">
             U
           </div>
-          <span className="text-lg font-semibold tracking-tight">react-uniswap</span>
+          <span className="text-lg font-semibold tracking-tight">@uniswap-widget/react</span>
         </div>
         <a
-          href="https://www.npmjs.com/package/react-uniswap"
+          href="https://www.npmjs.com/package/@uniswap-widget/react"
           target="_blank"
           rel="noreferrer"
           className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10"
@@ -190,7 +190,7 @@ const App: React.FC = () => {
         </div>
 
         <p className="mt-6 text-center text-xs text-white/40">
-          Built with <span className="text-white/70">react-uniswap</span> · demo
+          Built with <span className="text-white/70">@uniswap-widget/react</span> · demo
           on Base mainnet
         </p>
       </main>

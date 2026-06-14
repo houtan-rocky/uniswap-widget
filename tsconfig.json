@@ -2,7 +2,10 @@
   "comment": "Solution file: editors resolve each package via its own tsconfig. Typecheck runs per-package (`pnpm typecheck`).",
   "files": [],
   "references": [
+    { "path": "./packages/core" },
     { "path": "./packages/react-uniswap" },
-    { "path": "./examples/basic" }
+    { "path": "./packages/vue-uniswap" },
+    { "path": "./examples/basic" },
+    { "path": "./examples/vue" }
   ]
 }

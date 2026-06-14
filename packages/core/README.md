@@ -14,7 +14,7 @@ The framework bindings build their UI on top of this:
 
 | Package                  | Framework |
 | ------------------------ | --------- |
-| [`react-uniswap`](../react-uniswap) | React |
+| [`@uniswap-widget/react`](../react-uniswap) | React |
 | [`@uniswap-widget/vue`](../vue-uniswap) | Vue 3 |
 
 ## Why a separate core?

@@ -1,17 +1,17 @@
-# react-uniswap
+# @uniswap-widget/react
 
 <img width="581" height="546" alt="image" src="https://github.com/user-attachments/assets/b98e27cd-3a08-4a1e-a018-f12ef1cd9bba" />
 
 A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility — no token limitations, no warnings, and no added fee.
 
-> Looking for a runnable end-to-end setup? See [`examples/basic`](https://github.com/houtan/react-uniswap/tree/main/examples/basic) in the monorepo.
+> Looking for a runnable end-to-end setup? See [`examples/basic`](https://github.com/houtan/uniswap-widget/tree/main/examples/basic) in the monorepo.
 
 ## Installation
 
 The widget keeps its heavy dependencies as **peer dependencies**, so you install them alongside it (and stay in control of their versions):
 
 ```bash
-pnpm add react-uniswap \
+pnpm add @uniswap-widget/react \
   @reown/appkit @reown/appkit-adapter-wagmi wagmi viem \
   @tanstack/react-query ethers \
   @uniswap/sdk-core @uniswap/v3-sdk @uniswap/v3-core
@@ -20,7 +20,7 @@ pnpm add react-uniswap \
 
 ## Host-app requirements
 
-The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal — see the [decoupling spec](https://github.com/houtan/react-uniswap/blob/main/docs/0004-core-deps-decoupling.md).)
+The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal — see the [decoupling spec](https://github.com/houtan/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
 
 ### 1. Tailwind CSS
 
@@ -31,7 +31,7 @@ The widget is styled with **Tailwind utility classes** and ships **no CSS of its
 export default {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/react-uniswap/dist/*.js', // generate the widget's classes
+    './node_modules/@uniswap-widget/react/dist/*.js', // generate the widget's classes
   ],
 }
 ```
@@ -45,7 +45,7 @@ The widget calls these **relative** paths, which your app must proxy:
 | `/api/base-rpc` | POST | Base-chain JSON-RPC reads (balances, pool reserves, quotes) | Always |
 | `/api/uniswap/v2/Search.v1.SearchService/SearchTokens` | POST | Token search | `searchConfig.enabled` is `true` |
 
-See [`examples/basic/vite.config.ts`](https://github.com/houtan/react-uniswap/blob/main/examples/basic/vite.config.ts) (dev proxy) and [`examples/basic/api`](https://github.com/houtan/react-uniswap/tree/main/examples/basic/api) (Vercel functions) for a working reference.
+See [`examples/basic/vite.config.ts`](https://github.com/houtan/uniswap-widget/blob/main/examples/basic/vite.config.ts) (dev proxy) and [`examples/basic/api`](https://github.com/houtan/uniswap-widget/tree/main/examples/basic/api) (Vercel functions) for a working reference.
 
 ### 3. Vite-style env
 
@@ -62,7 +62,7 @@ Get your WalletConnect v2 Project ID at https://cloud.walletconnect.com/
 Wrap your app with the `Provider`, passing a configured `WagmiAdapter`:
 
 ```tsx
-import { Provider, createAppKit, WagmiAdapter, base } from 'react-uniswap';
+import { Provider, createAppKit, WagmiAdapter, base } from '@uniswap-widget/react';
 import { QueryClient } from '@tanstack/react-query';
 
 const projectId = 'your_project_id';
@@ -114,7 +114,7 @@ export default function App({ children }: { children: React.ReactNode }) {
 ## Usage
 
 ```tsx
-import { SwapWidget } from 'react-uniswap';
+import { SwapWidget } from '@uniswap-widget/react';
 
 export default function SwapPage() {
   const handleSwap = async (inputAmount: string, outputAmount: string) => {

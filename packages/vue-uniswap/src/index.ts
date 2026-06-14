@@ -22,7 +22,7 @@ export { UNISWAP_WIDGET_KEY } from "./context";
 export type { AppKitLike, UniswapWidgetContext } from "./context";
 
 // Re-export the core's data + types so Vue consumers have a single import
-// surface, mirroring what `react-uniswap` re-exports.
+// surface, mirroring what `@uniswap-widget/react` re-exports.
 export {
   DEFAULT_POOL_CONFIG,
   lightTheme,

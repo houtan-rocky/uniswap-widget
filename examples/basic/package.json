@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "react-uniswap": "workspace:*",
+    "@uniswap-widget/react": "workspace:*",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "wagmi": "catalog:web3",

@@ -1,12 +1,12 @@
 {
-  "name": "react-uniswap-monorepo",
+  "name": "uniswap-widget-monorepo",
   "private": true,
   "version": "0.0.0",
   "packageManager": "pnpm@11.5.3",
   "type": "module",
-  "description": "Monorepo for the react-uniswap swap widget and its examples",
+  "description": "Monorepo for the @uniswap-widget and its examples",
   "scripts": {
-    "build": "pnpm --filter react-uniswap build",
+    "build": "pnpm --filter @uniswap-widget/react build",
     "build:all": "pnpm -r build",
     "dev": "pnpm --filter @examples/basic dev",
     "dev:vue": "pnpm --filter @examples/vue dev",
