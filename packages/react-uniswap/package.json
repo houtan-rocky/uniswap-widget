@@ -1,6 +1,6 @@
 {
   "name": "react-uniswap",
-  "version": "1.0.28",
+  "version": "2.0.0",
   "type": "module",
   "description": "A clean Uniswap swap widget package for easy integration",
   "license": "MIT",
