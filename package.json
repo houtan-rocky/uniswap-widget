@@ -5,6 +5,7 @@
   "packageManager": "pnpm@11.5.3",
   "type": "module",
   "description": "Monorepo for the @uniswap-widget and its examples",
+  "license": "MIT",
   "scripts": {
     "build": "pnpm --filter @uniswap-widget/react build",
     "build:all": "pnpm -r build",
