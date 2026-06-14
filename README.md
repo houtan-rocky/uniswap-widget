@@ -1,7 +1,7 @@
 # uniswap-widget (monorepo)
 
-A pnpm monorepo for the **`@uniswap-widget`** swap widget — a framework-agnostic
-core with React and Vue bindings — and runnable examples.
+A pnpm monorepo for the **`@uniswap-widget`** swap widget  a framework-agnostic
+core with React and Vue bindings  and runnable examples.
 
 The widget lets you embed Uniswap swap functionality into a dApp with no token
 limitations, no warnings, and no added fee.
@@ -10,9 +10,9 @@ limitations, no warnings, and no added fee.
 
 ```
 packages/
-  core/              # @uniswap-widget/core  — framework-agnostic trading logic, types, themes
-  react-uniswap/     # @uniswap-widget/react — React binding (SwapWidget + hooks)
-  vue-uniswap/       # @uniswap-widget/vue   — Vue 3 binding (SwapWidget + composables)
+  core/              # @uniswap-widget/core   framework-agnostic trading logic, types, themes
+  react-uniswap/     # @uniswap-widget/react  React binding (SwapWidget + hooks)
+  vue-uniswap/       # @uniswap-widget/vue    Vue 3 binding (SwapWidget + composables)
 examples/
   basic/             # React app consuming @uniswap-widget/react (workspace:*)
   vue/               # Vue app consuming @uniswap-widget/vue (workspace:*)
@@ -65,7 +65,7 @@ cp examples/basic/.env.example examples/basic/.env
 ## Version management
 
 Dependency versions live in **pnpm catalogs** in
-[`pnpm-workspace.yaml`](pnpm-workspace.yaml) — a default catalog for build/lint
+[`pnpm-workspace.yaml`](pnpm-workspace.yaml)  a default catalog for build/lint
 tooling and named catalogs `react18`, `vue`, `web3`, `uniswap`. Packages
 reference them with the `catalog:` protocol. See
 [docs/0003](docs/0003-dependency-and-catalog-strategy.md).

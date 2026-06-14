@@ -183,7 +183,7 @@ async function handleSwap(inputAmount: string, outputAmount: string) {
           </span>
         </h1>
         <p class="mx-auto mt-3 max-w-md text-white/55">
-          The same Uniswap swap core — now in Vue. No warnings, no extra fees —
+          The same Uniswap swap core  now in Vue. No warnings, no extra fees 
           just trade.
         </p>
       </div>

@@ -1,5 +1,5 @@
 // =============================================================================
-// @uniswap-widget/vue — Vue 3 binding for the Uniswap swap widget
+// @uniswap-widget/vue  Vue 3 binding for the Uniswap swap widget
 //
 // A thin reactive layer over @uniswap-widget/core. The components and
 // composables here own Vue-specific concerns (reactivity, lifecycle, template);
@@ -10,7 +10,7 @@
 export { default as SwapWidget } from "./components/SwapWidget.vue";
 export { default as UniswapProvider } from "./components/UniswapProvider.vue";
 
-// Composables — for building custom Vue UIs on the core.
+// Composables  for building custom Vue UIs on the core.
 export { useWallet } from "./composables/useWallet";
 export { useQuote } from "./composables/useQuote";
 export { useSwap } from "./composables/useSwap";

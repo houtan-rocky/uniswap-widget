@@ -1,5 +1,5 @@
 // =============================================================================
-// @uniswap-widget/core — framework-agnostic toolkit
+// @uniswap-widget/core  framework-agnostic toolkit
 //
 // Everything here is plain TypeScript: trading logic, providers, types, and
 // theme data. No React, Vue, wagmi, or AppKit. Framework bindings
@@ -9,7 +9,7 @@
 // --- Trading logic ----------------------------------------------------------
 export { TokenSwapper } from "./libs/trading";
 
-// Shared swap operations — the reactive hooks/composables in each framework
+// Shared swap operations  the reactive hooks/composables in each framework
 // binding are thin wrappers around these.
 export { getQuote } from "./swap/quote";
 export type { GetQuoteParams, QuoteResult } from "./swap/quote";

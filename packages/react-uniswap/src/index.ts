@@ -24,7 +24,7 @@ export {
   solana,
 } from "@reown/appkit/networks";
 
-// Constants — re-exported from the framework-agnostic core so the public API
+// Constants  re-exported from the framework-agnostic core so the public API
 // of `@uniswap-widget/react` is unchanged for consumers.
 export {
   VIRTUAL_PROTOCOL_TOKEN,
@@ -34,7 +34,7 @@ export {
   SolaceTokenInfo,
 } from "@uniswap-widget/core";
 
-// Types — re-exported from core
+// Types  re-exported from core
 export type {
   SwapProps,
   ThemeConfig,
@@ -43,7 +43,7 @@ export type {
   SwapState,
 } from "@uniswap-widget/core";
 
-// Theme constants — re-exported from core
+// Theme constants  re-exported from core
 export { lightTheme, darkTheme } from "@uniswap-widget/core";
 
 // AppKit types

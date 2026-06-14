@@ -5,7 +5,7 @@ import { UNISWAP_WIDGET_KEY, type AppKitLike } from "../context";
 
 /**
  * Provides the wagmi config + AppKit instance to the widget. The Vue
- * counterpart of `@uniswap-widget/react`'s `<Provider>` — except `@wagmi/core` needs no
+ * counterpart of `@uniswap-widget/react`'s `<Provider>`  except `@wagmi/core` needs no
  * React-Query client, so this is just a context provider around the slot.
  */
 const props = defineProps<{

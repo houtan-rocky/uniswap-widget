@@ -161,7 +161,7 @@ const App: React.FC = () => {
             </span>
           </h1>
           <p className="mx-auto mt-3 max-w-md text-white/55">
-            A clean, embeddable Uniswap swap widget. No warnings, no extra fees —
+            A clean, embeddable Uniswap swap widget. No warnings, no extra fees 
             just trade.
           </p>
         </div>

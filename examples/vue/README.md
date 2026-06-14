@@ -2,7 +2,7 @@
 
 A minimal, runnable **Vue 3** app that consumes the
 [`@uniswap-widget/vue`](../../packages/vue-uniswap) widget the way a real
-downstream app would — it depends on the package via `workspace:*` and imports
+downstream app would  it depends on the package via `workspace:*` and imports
 the widget from its public entry point.
 
 It's the Vue counterpart of [`@examples/basic`](../basic) (React) and proves the
@@ -51,5 +51,5 @@ cp .env.example .env
 
 This example wires up Reown AppKit with the wagmi adapter (`createAppKit` +
 `WagmiAdapter`), then hands the adapter and AppKit instance to
-`<UniswapProvider>`. The widget talks to `@wagmi/core` directly — no
+`<UniswapProvider>`. The widget talks to `@wagmi/core` directly  no
 `@wagmi/vue` needed.

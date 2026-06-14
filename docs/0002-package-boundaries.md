@@ -1,4 +1,4 @@
-# 0002 — Package boundaries & public API
+# 0002  Package boundaries & public API
 
 - **Status:** Accepted
 - **Date:** 2026-06-13
@@ -6,7 +6,7 @@
 ## Context
 
 Splitting the repo (see [0001](0001-monorepo-architecture.md)) forces an
-explicit answer to "what is the widget, and what is just the demo?" — a line
+explicit answer to "what is the widget, and what is just the demo?"  a line
 that did not exist before.
 
 ## Decision
@@ -20,9 +20,9 @@ Moved to `packages/react-uniswap/src/`:
 
 Moved to `examples/basic/` (these are **app** concerns, not the widget):
 
-- `App.tsx`, `main.tsx`, `index.css` — demo entry + styles
-- `index.html`, `public/`, `api/`, `pages/`, `vercel.json` — host/deploy
-- `tailwind.config.js`, `postcss.config.js`, `.env*` — host build/config
+- `App.tsx`, `main.tsx`, `index.css`  demo entry + styles
+- `index.html`, `public/`, `api/`, `pages/`, `vercel.json`  host/deploy
+- `tailwind.config.js`, `postcss.config.js`, `.env*`  host build/config
 
 ### Public API surface
 
@@ -51,7 +51,7 @@ A scan of `src/` (imports of `@uniswap/*`, `wagmi`, `viem`, `ethers`,
 
 | Change | Reason |
 |--------|--------|
-| **+ `@uniswap/v3-sdk`** to `peerDependencies` | `libs/pool.ts` & `libs/dynamicFees.ts` import `computePoolAddress`/`FeeAmount` at runtime, and the bundle externalizes `@uniswap/*` — consumers must have it |
+| **+ `@uniswap/v3-sdk`** to `peerDependencies` | `libs/pool.ts` & `libs/dynamicFees.ts` import `computePoolAddress`/`FeeAmount` at runtime, and the bundle externalizes `@uniswap/*`  consumers must have it |
 | **+ `@uniswap/v3-core`** to `peerDependencies` | `libs/*` import the `IUniswapV3Pool.json` artifact at runtime |
 | **− `@uniswap/smart-order-router`** | Installed but never imported |
 | **− `@uniswap/v3-periphery`** | Installed but never imported |
@@ -65,11 +65,11 @@ A scan of `src/` (imports of `@uniswap/*`, `wagmi`, `viem`, `ethers`,
 These are real boundaries the widget assumes of its host. They are documented
 in the package README and slated for removal in [0004](0004-core-deps-decoupling.md):
 
-1. **Tailwind** — the widget emits Tailwind utility class names and ships no
+1. **Tailwind**  the widget emits Tailwind utility class names and ships no
    CSS; the host must run Tailwind and scan the package.
-2. **API proxy** — the widget calls relative paths `/api/base-rpc` (always) and
+2. **API proxy**  the widget calls relative paths `/api/base-rpc` (always) and
    `/api/uniswap/v2/Search.v1.SearchService/SearchTokens` (when search is on).
-3. **Vite env** — config is read from `import.meta.env.VITE_*`.
+3. **Vite env**  config is read from `import.meta.env.VITE_*`.
 
 ## Consequences
 

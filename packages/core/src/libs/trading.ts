@@ -45,7 +45,7 @@ export class TokenSwapper {
   private router: ethers.Contract | null = null;
   private tokenIn: ethers.Contract | null = null;
   private tokenOut: ethers.Contract | null = null;
-  // Write contracts (bound to `signer`) — used only to send transactions.
+  // Write contracts (bound to `signer`)  used only to send transactions.
   private routerWrite: ethers.Contract | null = null;
   private tokenInWrite: ethers.Contract | null = null;
   private tokenInAddress: string;
@@ -108,7 +108,7 @@ export class TokenSwapper {
         this.provider
       );
 
-      // Write contracts (wallet signer) — only used to send transactions.
+      // Write contracts (wallet signer)  only used to send transactions.
       this.routerWrite = new ethers.Contract(
         routerAddr,
         V2_ROUTER_ABI,

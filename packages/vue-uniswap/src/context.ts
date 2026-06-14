@@ -8,7 +8,7 @@ import type { Config } from "@wagmi/core";
  */
 export interface AppKitLike {
   // Method syntax (not arrow properties) so the parameter is checked
-  // bivariantly — the concrete AppKit's `open` narrows `view` to a literal
+  // bivariantly  the concrete AppKit's `open` narrows `view` to a literal
   // union, which a strict (contravariant) property check would reject.
   open(options?: { view?: string }): void | Promise<void>;
   close?(): void | Promise<void>;

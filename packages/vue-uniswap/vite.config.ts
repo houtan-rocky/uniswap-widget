@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 // Vue 3 component-library build. SFCs are compiled by @vitejs/plugin-vue; types
 // are emitted separately by vue-tsc (see the `build` script). The web3/uniswap
-// stack and the core stay external — provided by the host app.
+// stack and the core stay external  provided by the host app.
 export default defineConfig({
   plugins: [
     vue({

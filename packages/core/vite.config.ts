@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 
-// Framework-agnostic core library build. No React/Vue plugins here — this
+// Framework-agnostic core library build. No React/Vue plugins here  this
 // package is only trading logic, types, and theme data. The web3/uniswap stack
 // stays external (declared as peerDependencies), provided by the host app.
 export default defineConfig({

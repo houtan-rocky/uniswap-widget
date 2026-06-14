@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import type { TokenInfo } from "@uniswap-widget/core";
 
-/** Reactive swap state — the Vue counterpart of the React `SwapState`. */
+/** Reactive swap state  the Vue counterpart of the React `SwapState`. */
 export interface WidgetState {
   inputAmount: string;
   outputAmount: string;

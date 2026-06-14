@@ -2,7 +2,7 @@
 
 <img width="581" height="546" alt="image" src="https://github.com/user-attachments/assets/b98e27cd-3a08-4a1e-a018-f12ef1cd9bba" />
 
-A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility — no token limitations, no warnings, and no added fee.
+A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility  no token limitations, no warnings, and no added fee.
 
 > Looking for a runnable end-to-end setup? See [`examples/basic`](https://github.com/houtan/uniswap-widget/tree/main/examples/basic) in the monorepo.
 
@@ -20,7 +20,7 @@ pnpm add @uniswap-widget/react \
 
 ## Host-app requirements
 
-The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal — see the [decoupling spec](https://github.com/houtan/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
+The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal  see the [decoupling spec](https://github.com/houtan/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
 
 ### 1. Tailwind CSS
 
@@ -199,7 +199,7 @@ VITE_APP_DESCRIPTION=Your app description
 VITE_APP_URL=https://your-domain.com
 VITE_APP_ICON=https://your-icon-url.com
 
-# Optional — token-change controls (default: true)
+# Optional  token-change controls (default: true)
 VITE_ALLOW_SELL_TOKEN_CHANGE=true
 VITE_ALLOW_BUY_TOKEN_CHANGE=true
 ```

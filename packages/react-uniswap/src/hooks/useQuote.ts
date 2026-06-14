@@ -8,8 +8,8 @@ import {
 } from "@uniswap-widget/core";
 
 /**
- * React binding for the core `getQuote`. Owns the reactive concerns — debounce,
- * de-duplication, abort, and state writes — while the actual quote logic lives
+ * React binding for the core `getQuote`. Owns the reactive concerns  debounce,
+ * de-duplication, abort, and state writes  while the actual quote logic lives
  * in `@uniswap-widget/core`.
  */
 export default function useQuote({

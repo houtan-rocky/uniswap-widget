@@ -3,11 +3,11 @@
 Framework-agnostic core for the Uniswap swap widget. This package contains the
 parts that don't care which UI framework you use:
 
-- **Trading logic** — `TokenSwapper`, plus the shared `getQuote`, `executeSwap`,
+- **Trading logic**  `TokenSwapper`, plus the shared `getQuote`, `executeSwap`,
   and `searchTokens` operations.
-- **RPC layer** — rate-limited Base providers (`getProvider`,
+- **RPC layer**  rate-limited Base providers (`getProvider`,
   `makeProviderRequest`), pool lookups, and dynamic fee-tier selection.
-- **Types & themes** — `TokenInfo`, `PoolConfig`, `SwapState`, `ThemeConfig`,
+- **Types & themes**  `TokenInfo`, `PoolConfig`, `SwapState`, `ThemeConfig`,
   `SwapProps`, `lightTheme`, `darkTheme`, and the verified token constants.
 
 The framework bindings build their UI on top of this:
@@ -22,7 +22,7 @@ The framework bindings build their UI on top of this:
 The reactive hooks/composables in each binding are thin wrappers around the
 functions here, so there's exactly one implementation of "get a quote", "run a
 swap", and "search tokens". Adding a new framework means writing a new UI layer
-— never re-implementing the trading logic.
+ never re-implementing the trading logic.
 
 ```ts
 import { getQuote, executeSwap, searchTokens, TokenSwapper } from "@uniswap-widget/core";

@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 
 // Library build only. The dev server + API proxy that used to live here moved
-// to examples/basic — those are a *consumer* concern, not the widget's.
+// to examples/basic  those are a *consumer* concern, not the widget's.
 export default defineConfig({
   plugins: [
     react(),

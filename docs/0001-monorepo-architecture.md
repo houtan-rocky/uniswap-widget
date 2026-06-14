@@ -1,4 +1,4 @@
-# 0001 — Monorepo architecture
+# 0001  Monorepo architecture
 
 - **Status:** Accepted
 - **Date:** 2026-06-13
@@ -76,7 +76,7 @@ architectural decoupling.
 ## Consequences
 
 - **Clean ownership of dependencies.** A dep is either the widget's (peer/dev)
-  or an example's (runtime) — never ambiguous.
+  or an example's (runtime)  never ambiguous.
 - **Room to grow.** Additional examples (e.g. a Next.js host, a React-19 host)
   drop into `examples/*` with no change to the widget.
 - **Realistic dogfooding.** The example imports from the package entry, so a

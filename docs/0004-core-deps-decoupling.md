@@ -1,6 +1,6 @@
-# 0004 — Core ↔ external-deps decoupling
+# 0004  Core ↔ external-deps decoupling
 
-- **Status:** Proposed (phase 2 — not yet implemented)
+- **Status:** Proposed (phase 2  not yet implemented)
 - **Date:** 2026-06-13
 
 ## Context
@@ -29,7 +29,7 @@ Invert the dependencies: the **core** defines interfaces and receives
 implementations; the **external** wiring is supplied by the host (or by thin
 adapter packages we ship). Concretely:
 
-### 1 & 2 — Inject network access
+### 1 & 2  Inject network access
 
 Define small interfaces and accept them as configuration instead of reaching
 for fixed URLs:
@@ -49,7 +49,7 @@ behavior as the **default** implementations (`createUniswapTokenSearch()`,
 an RPC provider seeded from a `rpcUrl` prop that still defaults to
 `/api/base-rpc`) so nothing breaks for existing users.
 
-### 3 — Replace `import.meta.env` with explicit config
+### 3  Replace `import.meta.env` with explicit config
 
 Introduce a `WidgetConfig` object passed to `Provider`:
 
@@ -60,23 +60,23 @@ Introduce a `WidgetConfig` object passed to `Provider`:
 `config/env.ts` keeps reading `import.meta.env` only as a **fallback inside the
 example**, not inside core. Core becomes bundler-agnostic.
 
-### 4 — Ship styles
+### 4  Ship styles
 
 Add `import './index.css'` to a dedicated style entry and emit a CSS file from
 the library build; expose it as `react-uniswap/styles.css`. Hosts import one
 file instead of configuring Tailwind. (Keep the Tailwind-scan path documented as
 an advanced opt-in.)
 
-### 5 & 6 — Split into core + adapters (the larger move)
+### 5 & 6  Split into core + adapters (the larger move)
 
 Restructure into multiple packages so the dependency graph encodes the boundary:
 
 ```
 packages/
-  core/                  # @react-uniswap/core — pure quoting/pool/swap logic,
+  core/                  # @react-uniswap/core  pure quoting/pool/swap logic,
                          #   depends only on interfaces + a math lib. No wagmi,
                          #   no reown, ideally no concrete chain client.
-  react/                 # @react-uniswap/react — the SwapWidget UI + hooks
+  react/                 # @react-uniswap/react  the SwapWidget UI + hooks
   adapter-wagmi/         # wires wagmi/viem to the core interfaces
   adapter-ethers/        # wires ethers to the core interfaces
 react-uniswap            # meta-package: re-exports react + wagmi adapter
@@ -97,7 +97,7 @@ public API in [0002](0002-package-boundaries.md) is preserved.
 
 ## Consequences
 
-- Core becomes testable without a wallet, a browser, or a proxy — pure inputs
+- Core becomes testable without a wallet, a browser, or a proxy  pure inputs
   and outputs.
 - Hosts on any bundler/framework can use the widget; the Vite assumption dies.
 - More packages to version and release (mitigated by catalogs + a release tool

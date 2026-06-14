@@ -2,7 +2,7 @@
 
 A Vue 3 Uniswap swap widget, built on
 [`@uniswap-widget/core`](../core). The same trading logic that powers
-[`@uniswap-widget/react`](../react-uniswap) — exposed as Vue components and composables.
+[`@uniswap-widget/react`](../react-uniswap)  exposed as Vue components and composables.
 
 ```vue
 <script setup lang="ts">
@@ -29,17 +29,17 @@ const appKit = createAppKit({
 
 ## What's in the box
 
-- **`<SwapWidget>`** — the swap UI (a port of the React widget).
-- **`<UniswapProvider>`** — provides the wagmi config + AppKit instance to the
+- **`<SwapWidget>`**  the swap UI (a port of the React widget).
+- **`<UniswapProvider>`**  provides the wagmi config + AppKit instance to the
   widget via Vue's `provide`/`inject`.
-- **Composables** — `useWallet`, `useQuote`, `useSwap`, `createWidgetState` for
+- **Composables**  `useWallet`, `useQuote`, `useSwap`, `createWidgetState` for
   building your own UI on the core.
 
 ## Wallet layer
 
 Unlike the React binding (which uses the `wagmi` React hooks), this package talks
 to `@wagmi/core` directly and adapts the connected wallet into an
-`ethers.Signer` — exactly the input the core swap functions expect. That keeps
+`ethers.Signer`  exactly the input the core swap functions expect. That keeps
 the dependency surface to the already-pinned web3 stack: no `@wagmi/vue` or
 `@tanstack/vue-query` required.
 

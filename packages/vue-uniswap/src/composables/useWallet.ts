@@ -12,7 +12,7 @@ import { UNISWAP_WIDGET_KEY } from "../context";
  * Wallet binding for Vue.
  *
  * Tracks connection state from `@wagmi/core` and lazily adapts the connected
- * viem wallet client into an `ethers.Signer` — the exact shape the core swap
+ * viem wallet client into an `ethers.Signer`  the exact shape the core swap
  * functions expect. This is the Vue equivalent of the React widget's
  * `useAccount` + `useWalletClient` + `Web3Provider` dance.
  */
@@ -32,7 +32,7 @@ export function useWallet() {
   onMounted(() => {
     // Restore a previous session if there is one.
     reconnect(wagmiConfig).catch(() => {
-      /* no previous session — fine */
+      /* no previous session  fine */
     });
 
     unwatch = watchAccount(wagmiConfig, {
