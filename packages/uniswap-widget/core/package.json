@@ -1,8 +1,8 @@
 {
-  "name": "@uniswap-widget/vue",
-  "version": "1.0.1",
+  "name": "@uniswap-widget/core",
+  "version": "1.0.2",
   "type": "module",
-  "description": "Vue 3 Uniswap swap widget, built on @uniswap-widget/core",
+  "description": "Framework-agnostic core for the Uniswap swap widget: trading logic, types, and themes",
   "license": "MIT",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
@@ -31,9 +31,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "vite build && vue-tsc -p tsconfig.build.json",
+    "build": "tsc --noEmit && vite build",
     "build:watch": "vite build --watch",
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -44,41 +44,27 @@
     "swap",
     "widget",
     "defi",
-    "vue",
-    "ethereum"
+    "ethereum",
+    "core",
+    "framework-agnostic"
   ],
-  "dependencies": {
-    "@uniswap-widget/core": "workspace:*"
-  },
   "peerDependencies": {
-    "@reown/appkit": ">=1.4.0",
-    "@reown/appkit-adapter-wagmi": ">=1.4.0",
     "@uniswap/sdk-core": ">=5.0.0",
     "@uniswap/v3-sdk": ">=3.0.0",
     "@uniswap/v3-core": ">=1.0.0",
-    "@wagmi/core": ">=2.0.0",
-    "ethers": ">=5.7.0 <7.0.0",
-    "viem": ">=2.0.0",
-    "vue": ">=3.4.0"
+    "ethers": ">=5.7.0 <7.0.0"
   },
   "devDependencies": {
-    "@reown/appkit": "catalog:web3",
-    "@reown/appkit-adapter-wagmi": "catalog:web3",
     "@uniswap/sdk-core": "catalog:uniswap",
     "@uniswap/v3-core": "catalog:uniswap",
     "@uniswap/v3-sdk": "catalog:uniswap",
-    "@vitejs/plugin-vue": "catalog:vue",
     "@vitest/coverage-v8": "catalog:",
-    "@vue/test-utils": "catalog:vue",
-    "@wagmi/core": "catalog:web3",
     "ethers": "catalog:web3",
     "jsdom": "catalog:",
     "terser": "catalog:",
     "typescript": "catalog:",
-    "viem": "catalog:web3",
     "vite": "catalog:",
-    "vitest": "catalog:",
-    "vue": "catalog:vue",
-    "vue-tsc": "catalog:vue"
+    "vite-plugin-dts": "catalog:",
+    "vitest": "catalog:"
   }
 }
