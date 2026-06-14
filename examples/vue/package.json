@@ -1,0 +1,33 @@
+{
+  "name": "@examples/vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@uniswap-widget/vue": "workspace:*",
+    "vue": "catalog:vue",
+    "@wagmi/core": "catalog:web3",
+    "viem": "catalog:web3",
+    "@reown/appkit": "catalog:web3",
+    "@reown/appkit-adapter-wagmi": "catalog:web3",
+    "ethers": "catalog:web3",
+    "@uniswap/sdk-core": "catalog:uniswap",
+    "@uniswap/v3-sdk": "catalog:uniswap",
+    "@uniswap/v3-core": "catalog:uniswap"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:vue",
+    "autoprefixer": "catalog:",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:vue"
+  }
+}

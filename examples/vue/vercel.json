@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/uniswap/v1/quote",
+      "destination": "/api/quote.js"
+    },
+    {
+      "source": "/api/uniswap/v2/Search.v1.SearchService/SearchTokens",
+      "destination": "/api/search.js"
+    }
+  ]
+}

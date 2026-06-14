@@ -33,7 +33,10 @@ export default defineConfig({
       // Everything below is provided by the host app (declared as peerDependencies),
       // so it must stay external. Regexes keep subpath imports
       // ('@reown/appkit/react', 'viem/chains', ...) external too.
+      // `@uniswap-widget/core` is a regular dependency that ships as its own
+      // package, so it stays external rather than being inlined here.
       external: [
+        /^@uniswap-widget\//,
         /^react($|\/)/,
         /^react-dom($|\/)/,
         /^@wagmi\//,
@@ -48,6 +51,7 @@ export default defineConfig({
       output: {
         preserveModules: false, // required for the UMD build
         globals: {
+          '@uniswap-widget/core': 'UniswapWidgetCore',
           'react': 'React',
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'jsx',

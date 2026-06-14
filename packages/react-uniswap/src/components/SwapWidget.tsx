@@ -1,8 +1,13 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useAccount, useWalletClient } from "wagmi";
 import { ethers } from "ethers";
-import { DEFAULT_POOL_CONFIG } from "../config/tokens";
-import { SwapState, SwapProps, lightTheme, ThemeConfig } from "../types";
+import {
+  DEFAULT_POOL_CONFIG,
+  lightTheme,
+  type SwapState,
+  type SwapProps,
+  type ThemeConfig,
+} from "@uniswap-widget/core";
 import useQuote from "../hooks/useQuote";
 import useSwap from "../hooks/useSwap";
 import { useAppKit } from "@reown/appkit/react";

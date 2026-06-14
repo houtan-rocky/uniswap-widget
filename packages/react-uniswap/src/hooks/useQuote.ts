@@ -1,12 +1,16 @@
 import { useEffect, useRef } from "react";
 import { ethers } from "ethers";
-import { RATE_LIMIT_CONFIG } from "../config/rateLimit";
-import { SwapState, PoolConfig } from "../types";
-import { fromReadableAmount } from "../utils/conversion";
-import { TokenSwapper } from "../libs/trading";
+import {
+  getQuote,
+  RATE_LIMIT_CONFIG,
+  type SwapState,
+  type PoolConfig,
+} from "@uniswap-widget/core";
 
 /**
- * Custom hook to get quotes using callStatic
+ * React binding for the core `getQuote`. Owns the reactive concerns — debounce,
+ * de-duplication, abort, and state writes — while the actual quote logic lives
+ * in `@uniswap-widget/core`.
  */
 export default function useQuote({
   signer,
@@ -48,10 +52,10 @@ export default function useQuote({
       }
 
       if (!signer) {
-        setState((prev) => ({ 
-          ...prev, 
+        setState((prev) => ({
+          ...prev,
           outputAmount: "",
-          error: "Please connect your wallet to get quotes"
+          error: "Please connect your wallet to get quotes",
         }));
         return;
       }
@@ -62,74 +66,33 @@ export default function useQuote({
       }
       lastQuoteParams.current = quoteKey;
 
-      abortController.current = new AbortController();
+      const controller = new AbortController();
+      abortController.current = controller;
 
       try {
         setState((prev) => ({ ...prev, loading: true, error: null }));
 
-        console.log("Converting amount", {
+        const { outputAmount, routeInfo } = await getQuote({
+          signer,
+          inputToken: poolConfig.tokenIn,
+          outputToken: poolConfig.tokenOut,
           inputAmount: state.inputAmount,
-          decimals: poolConfig.tokenIn.decimals,
-          tokenAddress: poolConfig.tokenIn.address,
+          poolConfig,
+          signal: controller.signal,
         });
 
-        // Convert input amount to wei
-        const amountInWei = fromReadableAmount(
-          Number(state.inputAmount),
-          poolConfig.tokenIn.decimals
-        );
-
-        console.log("Amount in Wei:", amountInWei.toString());
-
-        if (abortController.current?.signal.aborted) {
+        if (controller.signal.aborted) {
           return;
         }
 
-        // Create TokenSwapper instance
-        const swapper = new TokenSwapper(
-          state.inputToken?.address as string,
-          state.outputToken?.address as string,
-          undefined,
-          signer
-        );
-
-        const simulationResult = await swapper.simulateTransaction(
-          amountInWei.toString()
-        );
-        if (simulationResult !== "Ok") {
-          throw new Error(`Quote simulation failed: ${simulationResult}`);
-        }
-
-        const quotedAmountOut = await swapper.getQuotedAmount(
-          amountInWei.toString()
-        );
-        const outDecimals = await swapper.getTokenOutDecimals();
-
-        if (abortController.current?.signal.aborted) {
-          return;
-        }
-
-        setState((prev) => ({
-          ...prev,
-          outputAmount: ethers.utils.formatUnits(quotedAmountOut, outDecimals),
-          routeInfo: {
-            isDirectRoute: true,
-            routeString: `Direct via ${poolConfig.tokenIn.symbol}/${poolConfig.tokenOut.symbol} Pool`,
-            routeType: poolConfig.version,
-          },
-        }));
+        setState((prev) => ({ ...prev, outputAmount, routeInfo }));
       } catch (err) {
-        if (abortController.current?.signal.aborted) {
+        if (controller.signal.aborted) {
           return;
         }
 
-        console.error("Error getting quote:", err);
-
-        let errorMessage = "Failed to get quote";
-
-        if (err instanceof Error) {
-          errorMessage = err.message;
-        }
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to get quote";
 
         setState((prev) => ({
           ...prev,
@@ -137,7 +100,7 @@ export default function useQuote({
           error: errorMessage,
         }));
       } finally {
-        if (!abortController.current?.signal.aborted) {
+        if (!controller.signal.aborted) {
           setState((prev) => ({ ...prev, loading: false }));
         }
       }

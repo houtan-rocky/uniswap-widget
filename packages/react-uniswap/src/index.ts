@@ -24,26 +24,27 @@ export {
   solana,
 } from "@reown/appkit/networks";
 
-// Constants
+// Constants — re-exported from the framework-agnostic core so the public API
+// of `react-uniswap` is unchanged for consumers.
 export {
   VIRTUAL_PROTOCOL_TOKEN,
   DEFAULT_SLIPPAGE,
   DEFAULT_DEADLINE_MINUTES,
   VritualProtocolTokenInfo,
   SolaceTokenInfo,
-} from "./constants";
+} from "@uniswap-widget/core";
 
-// Types from ./types
+// Types — re-exported from core
 export type {
   SwapProps,
   ThemeConfig,
   TokenInfo,
   PoolConfig,
   SwapState,
-} from "./types";
+} from "@uniswap-widget/core";
 
-// Constants from ./types
-export { lightTheme, darkTheme } from "./types";
+// Theme constants — re-exported from core
+export { lightTheme, darkTheme } from "@uniswap-widget/core";
 
 // AppKit types
 export type AppKitNetwork = typeof base;

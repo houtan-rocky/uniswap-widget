@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Token } from "@uniswap/sdk-core";
-import { TokenInfo, TokenWithInfo, TokenListType } from "../types";
+import { TokenInfo, TokenWithInfo, TokenListType } from "@uniswap-widget/core";
 import { useTokenSearch } from "../hooks/useTokenSearch";
 
 interface TokenListProps {

@@ -68,6 +68,10 @@ catalogs:
   # majors pnpm would otherwise resolve.
   web3:
     wagmi: ^2.12.0
+    # `@wagmi/core` is consumed directly by @uniswap-widget/vue (instead of
+    # @wagmi/vue), kept on the same 2.22.1 the override pins so there's a single
+    # wagmi core across React and Vue.
+    "@wagmi/core": "2.22.1"
     viem: ^2.21.0
     # Pin to the 1.4 line on purpose: Reown AppKit 1.8+ moved to wagmi 3, which
     # pulls a SECOND @wagmi/core major into the tree and breaks the widget's
@@ -83,6 +87,14 @@ catalogs:
     "@uniswap/sdk-core": ^5.0.0
     "@uniswap/v3-sdk": ^3.18.1
     "@uniswap/v3-core": ^1.0.1
+
+  # Vue 3 toolchain for @uniswap-widget/vue and the Vue example. Mirrors the
+  # react18 catalog's role: a coherent Vue set isolated from the React stack.
+  vue:
+    vue: ^3.5.13
+    "@vitejs/plugin-vue": ^5.2.1
+    vue-tsc: ^2.1.10
+    "@vue/test-utils": ^2.4.6
 
 # Dependency build scripts pnpm 11 is allowed to run. pnpm blocks postinstall
 # scripts by default; list each here and set true to permit, false to keep it

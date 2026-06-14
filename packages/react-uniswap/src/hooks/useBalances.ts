@@ -2,11 +2,14 @@ import { Currency, Token } from "@uniswap/sdk-core";
 import { ethers } from "ethers";
 import { useEffect, useRef } from "react";
 import { useAccount } from "wagmi";
-import { RATE_LIMIT_CONFIG } from "../config/rateLimit";
-import { ERC20_ABI } from "../constants";
-import { makeProviderRequest } from "../libs/provider";
-import { toReadableAmount } from "../libs/utils";
-import { SwapState, TokenInfo } from "../types";
+import {
+  ERC20_ABI,
+  RATE_LIMIT_CONFIG,
+  makeProviderRequest,
+  toReadableAmount,
+  type SwapState,
+  type TokenInfo,
+} from "@uniswap-widget/core";
 
 const tokenInfoToToken = (info: TokenInfo): Token => 
   new Token(info.chainId, info.address, info.decimals, info.symbol, info.name);
