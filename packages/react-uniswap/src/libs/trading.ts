@@ -2,6 +2,7 @@
 import { ethers } from "ethers";
 import { PoolConfig } from "../types";
 import { toChecksumAddress } from "../utils/addresses";
+import { getProvider } from "./provider";
 
 const ERC20_ABI = [
   "function allowance(address owner, address spender) view returns (uint256)",
@@ -37,11 +38,16 @@ interface SwapResult {
 }
 
 export class TokenSwapper {
+  // `provider` is a dedicated read RPC. All eth_call reads go through it.
   private provider: ethers.providers.Provider | null = null;
   private signer: ethers.Signer | null = null;
+  // Read-only contracts (bound to `provider`).
   private router: ethers.Contract | null = null;
   private tokenIn: ethers.Contract | null = null;
   private tokenOut: ethers.Contract | null = null;
+  // Write contracts (bound to `signer`) — used only to send transactions.
+  private routerWrite: ethers.Contract | null = null;
+  private tokenInWrite: ethers.Contract | null = null;
   private tokenInAddress: string;
   private tokenOutAddress: string;
   private poolConfig: PoolConfig | null = null;
@@ -77,26 +83,39 @@ export class TokenSwapper {
       throw new Error("Signer not provided");
     }
 
-    const provider = this.signer.provider;
-    if (!provider) {
-      throw new Error("Provider not found");
+    // Reads use a dedicated RPC, NOT the wallet's injected provider. Wallet
+    // RPCs (e.g. MetaMask/Infura) frequently rate-limit or return HTTP 401 on
+    // the many eth_call reads this widget makes (balanceOf, decimals,
+    // getReserves, getAmountsOut, ...). Only approve/swap go through the signer.
+    if (!this.provider) {
+      this.provider = getProvider(8453);
     }
-    this.provider = provider;
 
     if (!this.router) {
-      this.router = new ethers.Contract(
-        this.routerAddress || "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24",
-        V2_ROUTER_ABI,
-        this.signer
-      );
+      const routerAddr =
+        this.routerAddress || "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24";
 
+      // Read-only contracts (dedicated RPC).
+      this.router = new ethers.Contract(routerAddr, V2_ROUTER_ABI, this.provider);
       this.tokenIn = new ethers.Contract(
         this.tokenInAddress,
         ERC20_ABI,
-        this.signer
+        this.provider
       );
       this.tokenOut = new ethers.Contract(
         this.tokenOutAddress,
+        ERC20_ABI,
+        this.provider
+      );
+
+      // Write contracts (wallet signer) — only used to send transactions.
+      this.routerWrite = new ethers.Contract(
+        routerAddr,
+        V2_ROUTER_ABI,
+        this.signer
+      );
+      this.tokenInWrite = new ethers.Contract(
+        this.tokenInAddress,
         ERC20_ABI,
         this.signer
       );
@@ -291,21 +310,23 @@ export class TokenSwapper {
         ? ethers.utils.parseEther(minAmountOut)
         : minAmountOut;
 
+    // Read allowance via the dedicated RPC.
     const allowance = await this.tokenIn!.allowance(
       await this.signer.getAddress(),
       this.router!.address
     );
 
     if (allowance.lt(amountInWei)) {
-      const tx = await this.tokenIn!.approve(
+      // Write through the wallet, then wait via the dedicated RPC.
+      const approveTx = await this.tokenInWrite!.approve(
         this.router!.address,
         ethers.constants.MaxUint256
       );
-      await tx.wait();
+      await this.provider!.waitForTransaction(approveTx.hash);
     }
 
     const path = [this.tokenInAddress, this.tokenOutAddress];
-    const tx = await this.router!.swapExactTokensForTokens(
+    const tx = await this.routerWrite!.swapExactTokensForTokens(
       amountInWei,
       minAmountOutWei,
       path,

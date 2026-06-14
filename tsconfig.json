@@ -1,26 +1,8 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationDir": "./dist",
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "comment": "Solution file: editors resolve each package via its own tsconfig. Typecheck runs per-package (`pnpm typecheck`).",
+  "files": [],
+  "references": [
+    { "path": "./packages/react-uniswap" },
+    { "path": "./examples/basic" }
+  ]
 }

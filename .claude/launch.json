@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "basic-example",
+      "runtimeExecutable": "wsl",
+      "runtimeArgs": [
+        "-d",
+        "ubuntu-24.04",
+        "bash",
+        "-lic",
+        "cd ~/Repos/react-uniswap/examples/basic && pnpm exec vite --host 0.0.0.0 --port 5188 --strictPort"
+      ],
+      "port": 5188
+    }
+  ]
+}

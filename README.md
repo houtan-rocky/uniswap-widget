@@ -1,142 +1,70 @@
-# Uniswap Widget Package
+# react-uniswap (monorepo)
 
-<img width="581" height="546" alt="image" src="https://github.com/user-attachments/assets/b98e27cd-3a08-4a1e-a018-f12ef1cd9bba" />
+A pnpm monorepo for the **`react-uniswap`** swap widget and its examples.
 
+The widget lets you embed Uniswap swap functionality into a React dApp with no
+token limitations, no warnings, and no added fee.
 
-A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility, and no limitation, no warnings on any token, and no fee.
+## Layout
 
-## Installation
+```
+packages/
+  react-uniswap/     # the published widget  →  npm: react-uniswap
+examples/
+  basic/             # runnable app that consumes the widget (workspace:*)
+docs/               # architecture & design decision records
+```
+
+## Quick start
 
 ```bash
-npm install uniswap-widget-package @reown/appkit @reown/appkit-adapter-wagmi wagmi @tanstack/react-query
-# or
-yarn add uniswap-widget-package @reown/appkit @reown/appkit-adapter-wagmi wagmi @tanstack/react-query
-# or
-pnpm add uniswap-widget-package @reown/appkit @reown/appkit-adapter-wagmi wagmi @tanstack/react-query
+# Node + Corepack (pins pnpm via the "packageManager" field)
+corepack enable pnpm
+
+pnpm install         # install & link every workspace package
+pnpm dev             # run examples/basic (Vite dev server)
 ```
 
-## Configuration
+Then copy the example's env file and add your keys:
 
-### 1. WalletConnect Project ID
-Get your WalletConnect v2 Project ID at: https://cloud.walletconnect.com/
-
-### 2. Provider Setup
-
-Set up the Provider with WagmiAdapter and AppKit:
-
-```tsx
-import { Provider, createAppKit } from 'uniswap-widget-package';
-import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
-import { base } from '@reown/appkit/networks';
-import { QueryClient } from '@tanstack/react-query';
-
-// Setup
-const projectId = 'your_project_id';
-const queryClient = new QueryClient();
-
-// Create Wagmi Adapter
-const wagmiAdapter = new WagmiAdapter({
-  projectId,
-  networks: [base],
-  ssr: true
-});
-
-// Create modal
-createAppKit({
-  adapters: [wagmiAdapter],
-  networks: [base],
-  projectId,
-  metadata: {
-    name: "Your App Name",
-    description: "Your app description",
-    url: "https://your-domain.com",
-    icons: ["https://your-icon-url.com"],
-  },
-  features: {
-    analytics: true,
-    email: false,
-    socials: [],
-    allWallets: true,
-    emailShowWallets: true,
-    swaps: false,
-  }
-});
-
-// Wrap your app with the Provider
-export default function App({ children }) {
-  return (
-    <Provider wagmiAdapter={wagmiAdapter} queryClient={queryClient}>
-      {children}
-    </Provider>
-  );
-}
+```bash
+cp examples/basic/.env.example examples/basic/.env
 ```
 
-## Provider Props
+## Common commands (run at the root)
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| wagmiAdapter | WagmiAdapter | Yes | Configured WagmiAdapter instance |
-| queryClient | QueryClient | No | React Query client instance (defaults to new QueryClient) |
-| children | ReactNode | Yes | Child components |
+| Command | Effect |
+|---------|--------|
+| `pnpm dev` | Run the `examples/basic` dev server |
+| `pnpm build` | Build the widget (`packages/react-uniswap`) |
+| `pnpm build:all` | Build every package |
+| `pnpm typecheck` | `tsc --noEmit` across packages |
+| `pnpm test` | Run the Vitest specs (`pnpm --filter react-uniswap test:watch` to watch) |
+| `pnpm lint` | ESLint across the repo |
 
-## Usage
+## Packages
 
-```tsx
-import { SwapWidget } from 'uniswap-widget-package';
+| Package | Path | Description |
+|---------|------|-------------|
+| [`react-uniswap`](packages/react-uniswap/README.md) | `packages/react-uniswap` | The published swap widget. **Start here for usage & API docs.** |
 
-export default function SwapPage() {
-  const handleSwap = async (inputAmount: string, outputAmount: string) => {
-    console.log("Swap:", { inputAmount, outputAmount });
-    // Add your swap logic here
-  };
+## Examples
 
-  return (
-    <SwapWidget 
-      poolConfig={{
-        tokenIn: {
-          // Your token configuration
-        },
-        tokenOut: {
-          // Your token configuration
-        },
-        poolAddress: "your_pool_address",
-        version: "V2"
-      }}
-      allowTokenChange={true}
-      onSwap={handleSwap}
-      searchConfig={{
-        enabled: true,
-        chainIds: [8453] // Base chain
-      }}
-    />
-  );
-}
-```
+| Example | Path | Description |
+|---------|------|-------------|
+| [`@examples/basic`](examples/basic/README.md) | `examples/basic` | Minimal consumer app; also the reference for the widget's host-app contract (Tailwind + API proxy + env). |
 
-## Requirements
+## Version management
 
-- React 18 or higher
-- Valid WalletConnect v2 Project ID
-- Supported networks configuration
+Dependency versions live in **pnpm catalogs** in
+[`pnpm-workspace.yaml`](pnpm-workspace.yaml) — a default catalog for build/lint
+tooling and named catalogs `react18`, `web3`, `uniswap`. Packages reference them
+with the `catalog:` protocol. See [docs/0003](docs/0003-dependency-and-catalog-strategy.md).
 
-## Features
+## Design docs
 
-- Easy integration with React applications
-- Built-in wallet connection via WalletConnect v2
-- Customizable UI
-- TypeScript support
-- Multi-chain support
-- SSR support
-- Mobile wallet support
-- Configurable AppKit features
-
-## Environment Variables
-
-```env
-VITE_REOWN_PROJECT_ID=your_project_id
-VITE_APP_URL=your_app_url
-```
+See [`docs/`](docs/README.md) for the architecture and the planned
+core/external-deps decoupling ([0004](docs/0004-core-deps-decoupling.md)).
 
 ## License
 

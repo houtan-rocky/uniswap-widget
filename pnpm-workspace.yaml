@@ -1,0 +1,96 @@
+# pnpm workspace definition.
+#
+# `packages` declares where workspace packages live. Anything matching these
+# globs is linked locally, so examples can depend on the widget via
+# `"react-uniswap": "workspace:*"` and always build against local source.
+packages:
+  - "packages/*"
+  - "examples/*"
+
+# Reown AppKit 1.4's transitive ranges are loose, so pnpm otherwise floats
+# @wagmi/connectors to 8 / @wagmi/core to 3 — a second wagmi major alongside the
+# widget's wagmi 2, which breaks the `Config` types. Force the wagmi internals
+# onto the exact set that wagmi@2.19.5 itself uses.
+overrides:
+  "@wagmi/core": "2.22.1"
+  "@wagmi/connectors": "6.2.0"
+
+# ---------------------------------------------------------------------------
+# Catalogs — single source of truth for dependency versions.
+#
+# A package references a catalog entry with the `catalog:` protocol instead of
+# a literal range, e.g. `"react": "catalog:react18"`. Bumping a version here
+# updates every package at once and guarantees they stay aligned. On publish,
+# pnpm rewrites `catalog:` specifiers back to the resolved range, so consumers
+# never see the protocol.
+# ---------------------------------------------------------------------------
+
+# Default (unnamed) catalog: repo-wide build & lint tooling, referenced as
+# `catalog:` (no name). These are dev-only and identical across packages.
+catalog:
+  typescript: ~5.6.2
+  vite: ^5.4.10
+  "@vitejs/plugin-react": ^4.3.3
+  vite-plugin-dts: ^3.7.3
+  terser: ^5.41.0
+  eslint: ^9.13.0
+  "@eslint/js": ^9.13.0
+  typescript-eslint: ^8.11.0
+  eslint-plugin-react-hooks: ^5.0.0
+  eslint-plugin-react-refresh: ^0.4.14
+  globals: ^15.11.0
+  tailwindcss: ^3.4.15
+  postcss: ^8.4.49
+  autoprefixer: ^10.4.20
+  # Testing
+  vitest: ^2.1.8
+  "@vitest/coverage-v8": ^2.1.8
+  jsdom: ^25.0.1
+  "@testing-library/react": ^16.1.0
+  "@testing-library/dom": ^10.4.0
+  "@testing-library/jest-dom": ^6.6.3
+
+# Named catalogs: coherent version *sets* grouped by concern. Named catalogs
+# let a future React-19 example opt into a `react19` set without touching the
+# widget, and keep the "external" web3/uniswap stacks pinned in one place —
+# directly serving the "core separate from external deps" goal.
+catalogs:
+  # The React line the widget supports. Add a `react19` catalog later to host
+  # a second example without disturbing this one.
+  react18:
+    react: ^18.3.1
+    react-dom: ^18.3.1
+    "@types/react": ^18.3.12
+    "@types/react-dom": ^18.3.1
+
+  # External wallet / blockchain stack. Pinned to the set the widget was built
+  # against (Reown AppKit 1.4 + wagmi 2 + viem 2 + ethers 5), NOT the latest
+  # majors pnpm would otherwise resolve.
+  web3:
+    wagmi: ^2.12.0
+    viem: ^2.21.0
+    # Pin to the 1.4 line on purpose: Reown AppKit 1.8+ moved to wagmi 3, which
+    # pulls a SECOND @wagmi/core major into the tree and breaks the widget's
+    # wagmi-2 `Config` types. Keep the whole web3 stack on wagmi 2.
+    "@reown/appkit": ~1.4.1
+    "@reown/appkit-adapter-wagmi": ~1.4.1
+    "@tanstack/react-query": ^5.60.5
+    ethers: ^5.7.2
+
+  # Uniswap SDK suite actually imported by the widget. (smart-order-router and
+  # v3-periphery were dropped — they were installed but never imported.)
+  uniswap:
+    "@uniswap/sdk-core": ^5.0.0
+    "@uniswap/v3-sdk": ^3.18.1
+    "@uniswap/v3-core": ^1.0.1
+
+# Dependency build scripts pnpm 11 is allowed to run. pnpm blocks postinstall
+# scripts by default; list each here and set true to permit, false to keep it
+# blocked. (This is pnpm 11's mechanism; the older `onlyBuiltDependencies`
+# array is not honored on this version.)
+allowBuilds:
+  '@reown/appkit': true
+  bufferutil: true
+  esbuild: true
+  keccak: true
+  utf-8-validate: true

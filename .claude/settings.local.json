@@ -7,7 +7,8 @@
       "Read(///wsl.localhost/ubuntu-24.04/home/anon/Repos/react-uniswap/**)",
       "Bash(d=\"//wsl.localhost/ubuntu-24.04/home/anon/Repos/react-uniswap\"; echo \"=== index.d.ts ext imports:\"; grep -o \"from '[^']*'\\\\|from \\\\\"[^\\\\\"]*\\\\\"\" \"$d/dist/index.d.ts\" | sort -u; echo \"=== viem in src:\"; grep -rn \"viem\" \"$d/src\" || echo none)",
       "Bash(grep -c tailwind __TRACKED_VAR__/dist/index.es.js)",
-      "Bash(grep -o 'from \"[^\"]*\"' __TRACKED_VAR__/dist/index.es.js)"
+      "Bash(grep -o 'from \"[^\"]*\"' __TRACKED_VAR__/dist/index.es.js)",
+      "Bash(cd \"\\\\\\\\\\\\\\\\wsl.localhost\\\\ubuntu-24.04\\\\home\\\\anon\\\\Repos\\\\react-uniswap\" && find src api pages -type f -not -path '*/node_modules/*' | sort)"
     ]
   }
 }

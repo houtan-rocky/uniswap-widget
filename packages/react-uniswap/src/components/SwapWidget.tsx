@@ -10,7 +10,7 @@ import { useAppKit } from "@reown/appkit/react";
 const cx = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(" ");
 
-const ArrowDown = (props: any) => (
+const ArrowDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 512 512" className="text-2xl w-6 h-6" fill="currentColor">
     <path d="M256 400L56 200h400L256 400z"/>
   </svg>
@@ -141,13 +141,17 @@ const SwapWidget: React.FC<SwapProps> = ({
             onChange={handleInputAmountChange}
             className={cx(
               "w-full text-2xl outline-none",
-              !isConnected && "cursor-not-allowed bg-gray-100"
+              !isConnected && "cursor-not-allowed"
             )}
             placeholder="0"
             inputMode="decimal"
             style={{
-              backgroundColor: !isConnected ? "#f3f4f6" : theme.inputField.background,
-              color: !isConnected ? "#9ca3af" : theme.inputField.text,
+              backgroundColor: !isConnected
+                ? theme.inputField.disabledBackground
+                : theme.inputField.background,
+              color: !isConnected
+                ? theme.inputField.disabledText
+                : theme.inputField.text,
             }}
           />
           <div className="flex flex-col gap-2">
@@ -217,11 +221,15 @@ const SwapWidget: React.FC<SwapProps> = ({
             disabled={true}
             className={cx(
               "w-full text-2xl outline-none disabled:text-lg",
-              !isConnected && "cursor-not-allowed bg-gray-100"
+              !isConnected && "cursor-not-allowed"
             )}
             style={{
-              backgroundColor: !isConnected ? "#f3f4f6" : theme.inputField.background,
-              color: !isConnected ? "#9ca3af" : theme.inputField.text,
+              backgroundColor: !isConnected
+                ? theme.inputField.disabledBackground
+                : theme.inputField.background,
+              color: !isConnected
+                ? theme.inputField.disabledText
+                : theme.inputField.text,
               opacity: state.loading ? 0.3 : !isConnected ? 0.5 : 0.8,
             }}
             placeholder="0"

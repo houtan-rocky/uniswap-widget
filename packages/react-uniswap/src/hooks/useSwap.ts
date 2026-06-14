@@ -1,4 +1,5 @@
 import { TokenSwapper } from "../libs/trading";
+import { getProvider } from "../libs/provider";
 import { SwapState } from "../types";
 import { ethers } from "ethers";
 

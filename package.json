@@ -1,74 +1,27 @@
 {
-  "name": "@houtan-rocky/react-uniswap",
-  "private": false,
-  "version": "1.0.28",
+  "name": "react-uniswap-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.5.3",
   "type": "module",
-  "description": "A clean Uniswap swap widget package for easy integration",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "description": "Monorepo for the react-uniswap swap widget and its examples",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "prepare": "npm run build",
+    "build": "pnpm --filter react-uniswap build",
+    "build:all": "pnpm -r build",
+    "dev": "pnpm --filter @examples/basic dev",
+    "preview": "pnpm --filter @examples/basic preview",
     "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "keywords": [
-    "uniswap",
-    "swap",
-    "widget",
-    "defi",
-    "react",
-    "ethereum"
-  ],
-  "peerDependencies": {
-    "@reown/appkit": ">=1.4.0",
-    "@reown/appkit-adapter-wagmi": ">=1.4.0",
-    "@tanstack/react-query": ">=5.0.0",
-    "@uniswap/sdk-core": ">=5.0.0",
-    "ethers": ">=5.7.0 <7.0.0",
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "wagmi": ">=2.0.0"
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "clean": "pnpm -r --if-present clean"
   },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "@reown/appkit": "^1.4.1",
-    "@reown/appkit-adapter-wagmi": "^1.4.1",
-    "@tanstack/react-query": "^5.60.5",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@uniswap/sdk-core": "^5.0.0",
-    "@uniswap/smart-order-router": "^4.21.17",
-    "@uniswap/v3-core": "^1.0.1",
-    "@uniswap/v3-periphery": "^1.4.4",
-    "@uniswap/v3-sdk": "^3.18.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "ethers": "^5.7.2",
-    "globals": "^15.11.0",
-    "jsbi": "^3.2.0",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15",
-    "terser": "^5.41.0",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.11.0",
-    "vite": "^5.4.10",
-    "vite-plugin-dts": "^3.7.3"
+    "@eslint/js": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
   }
 }

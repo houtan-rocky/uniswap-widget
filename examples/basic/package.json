@@ -1,0 +1,36 @@
+{
+  "name": "@examples/basic",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react-uniswap": "workspace:*",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
+    "wagmi": "catalog:web3",
+    "viem": "catalog:web3",
+    "@reown/appkit": "catalog:web3",
+    "@reown/appkit-adapter-wagmi": "catalog:web3",
+    "@tanstack/react-query": "catalog:web3",
+    "ethers": "catalog:web3",
+    "@uniswap/sdk-core": "catalog:uniswap",
+    "@uniswap/v3-sdk": "catalog:uniswap",
+    "@uniswap/v3-core": "catalog:uniswap"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
+    "@vitejs/plugin-react": "catalog:",
+    "autoprefixer": "catalog:",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
