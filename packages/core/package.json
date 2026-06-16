@@ -60,7 +60,6 @@
     "@uniswap/v3-sdk": "catalog:uniswap",
     "@vitest/coverage-v8": "catalog:",
     "ethers": "catalog:web3",
-    "jsdom": "catalog:",
     "terser": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

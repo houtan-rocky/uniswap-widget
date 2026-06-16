@@ -18,6 +18,8 @@ pnpm add @uniswap-widget/react \
 # or: npm install … / yarn add …
 ```
 
+> Using a different wallet library? `@reown/appkit` + `@reown/appkit-adapter-wagmi` are **optional** — see [Wallet adapters](#wallet-adapters-plugin).
+
 ## Host-app requirements
 
 The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal  see the [decoupling spec](https://github.com/houtan/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
@@ -109,7 +111,75 @@ export default function App({ children }: { children: React.ReactNode }) {
 |------|------|----------|-------------|
 | `wagmiAdapter` | `WagmiAdapter` | Yes | Configured `WagmiAdapter` instance |
 | `queryClient` | `QueryClient` | No | React Query client (defaults to a new `QueryClient`) |
+| `walletAdapter` | `WalletAdapter` | No | Wallet integration (defaults to the Reown adapter). See [Wallet adapters](#wallet-adapters-plugin) |
 | `children` | `ReactNode` | Yes | Child components |
+
+## Wallet adapters (plugin)
+
+The widget is **wallet-agnostic** — it reads the connected account and an ethers
+`Signer` from a small adapter context, so Reown AppKit is just the default. Plug
+in any wallet library:
+
+- **Default (Reown AppKit):** use `<Provider>` as shown above — nothing to do.
+- **Another wallet library:** pass a `walletAdapter` to `<Provider>`, or skip
+  `<Provider>` and wrap `<SwapWidget>` in `<WalletAdapterProvider adapter={…}>`
+  inside your own wallet setup.
+
+A `WalletAdapter` is a React hook returning a `WalletConnection`:
+
+```ts
+interface WalletConnection {
+  isConnected: boolean;
+  address?: string;
+  signer?: ethers.Signer;                // the only thing the swap logic needs
+  connect: () => void | Promise<void>;
+  disconnect?: () => void | Promise<void>;
+  AccountButton?: React.ComponentType;   // optional account UI
+}
+type WalletAdapter = () => WalletConnection;
+```
+
+### Built-in: injected wallet (no Reown, no wagmi)
+
+`useInjectedWalletAdapter` talks to `window.ethereum` (MetaMask, Rabby, Coinbase
+Wallet, …) using only `ethers` — with this path `@reown/appkit*` aren't needed
+(they're optional peers):
+
+```tsx
+import {
+  SwapWidget,
+  WalletAdapterProvider,
+  useInjectedWalletAdapter,
+} from '@uniswap-widget/react';
+
+export default function App() {
+  return (
+    <WalletAdapterProvider adapter={useInjectedWalletAdapter}>
+      <SwapWidget poolConfig={/* … */} />
+    </WalletAdapterProvider>
+  );
+}
+```
+
+### Writing your own
+
+```tsx
+import { useAccount, useWalletClient } from 'wagmi';
+import { ethers } from 'ethers';
+import type { WalletAdapter } from '@uniswap-widget/react';
+
+// Adapt RainbowKit / ConnectKit / your own wagmi connect button, etc.:
+const useMyAdapter: WalletAdapter = () => {
+  const { isConnected, address } = useAccount();
+  const { data: walletClient } = useWalletClient();
+  const signer = walletClient
+    ? new ethers.providers.Web3Provider(walletClient.transport).getSigner(
+        walletClient.account.address,
+      )
+    : undefined;
+  return { isConnected, address, signer, connect: () => {/* open your modal */} };
+};
+```
 
 ## Usage
 
@@ -177,6 +247,7 @@ export default function SwapPage() {
 ## Exports
 
 - **Components:** `SwapWidget`, `Provider` (+ `ProviderProps`)
+- **Wallet plugin:** `WalletAdapterProvider`, `useWallet`, `useReownWalletAdapter`, `useInjectedWalletAdapter`, and types `WalletConnection`, `WalletAdapter`
 - **AppKit/wagmi re-exports:** `createAppKit`, `useAppKit`, `WagmiAdapter`, `CreateConnectorFn`
 - **Networks:** `base`, `mainnet`, `polygon`, `optimism`, `arbitrum`, `avalanche`, `fantom`, `moonbeam`, `solana`
 - **Themes:** `lightTheme`, `darkTheme`

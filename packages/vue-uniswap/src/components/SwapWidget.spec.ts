@@ -1,13 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
-
-// Stub the wallet layer so mounting performs no real connection / network.
-vi.mock("@wagmi/core", () => ({
-  getAccount: vi.fn(() => ({ isConnected: false, address: undefined })),
-  watchAccount: vi.fn(() => () => {}),
-  reconnect: vi.fn().mockResolvedValue(undefined),
-  getWalletClient: vi.fn().mockResolvedValue(null),
-}));
+import { ref } from "vue";
 
 // Keep the real core values (DEFAULT_POOL_CONFIG, lightTheme) but stub the
 // network-touching functions.
@@ -17,17 +10,19 @@ vi.mock("@uniswap-widget/core", async (importActual) => {
 });
 
 import SwapWidget from "./SwapWidget.vue";
-import { UNISWAP_WIDGET_KEY } from "../context";
+import { WALLET_KEY } from "../wallet/context";
+import type { WalletConnection } from "../wallet/types";
 
-function mountWidget(appKit: { open: ReturnType<typeof vi.fn> } = { open: vi.fn() }) {
+function mountWidget(connect = vi.fn()) {
+  const connection: WalletConnection = {
+    isConnected: ref(false),
+    address: ref(undefined),
+    getSigner: vi.fn().mockResolvedValue(undefined),
+    connect,
+  };
   return mount(SwapWidget, {
     global: {
-      provide: {
-        [UNISWAP_WIDGET_KEY as symbol]: {
-          wagmiConfig: {} as never,
-          appKit,
-        },
-      },
+      provide: { [WALLET_KEY as symbol]: connection },
     },
   });
 }
@@ -41,11 +36,11 @@ describe("SwapWidget.vue", () => {
     expect(text).toContain("Connect Wallet");
   });
 
-  it("opens AppKit when Connect Wallet is clicked", async () => {
-    const appKit = { open: vi.fn() };
-    const wrapper = mountWidget(appKit);
+  it("calls the adapter's connect() when Connect Wallet is clicked", async () => {
+    const connect = vi.fn();
+    const wrapper = mountWidget(connect);
     await wrapper.get("button").trigger("click");
-    expect(appKit.open).toHaveBeenCalledWith({ view: "Connect" });
+    expect(connect).toHaveBeenCalled();
   });
 
   it("disables the sell input while disconnected", () => {
