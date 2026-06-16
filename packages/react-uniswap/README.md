@@ -4,7 +4,7 @@
 
 A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility  no token limitations, no warnings, and no added fee.
 
-> Looking for a runnable end-to-end setup? See [`examples/basic`](https://github.com/houtan/uniswap-widget/tree/main/examples/basic) in the monorepo.
+> Looking for a runnable end-to-end setup? See [`examples/basic`](https://github.com/houtan-rocky/uniswap-widget/tree/main/examples/basic) in the monorepo.
 
 ## Installation
 
@@ -22,7 +22,7 @@ pnpm add @uniswap-widget/react \
 
 ## Host-app requirements
 
-The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal  see the [decoupling spec](https://github.com/houtan/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
+The widget makes three assumptions about the app embedding it. Satisfy all three or it won't render/behave correctly. (These are tracked for removal  see the [decoupling spec](https://github.com/houtan-rocky/uniswap-widget/blob/main/docs/0004-core-deps-decoupling.md).)
 
 ### 1. Tailwind CSS
 
@@ -47,7 +47,7 @@ The widget calls these **relative** paths, which your app must proxy:
 | `/api/base-rpc` | POST | Base-chain JSON-RPC reads (balances, pool reserves, quotes) | Always |
 | `/api/uniswap/v2/Search.v1.SearchService/SearchTokens` | POST | Token search | `searchConfig.enabled` is `true` |
 
-See [`examples/basic/vite.config.ts`](https://github.com/houtan/uniswap-widget/blob/main/examples/basic/vite.config.ts) (dev proxy) and [`examples/basic/api`](https://github.com/houtan/uniswap-widget/tree/main/examples/basic/api) (Vercel functions) for a working reference.
+See [`examples/basic/vite.config.ts`](https://github.com/houtan-rocky/uniswap-widget/blob/main/examples/basic/vite.config.ts) (dev proxy) and [`examples/basic/api`](https://github.com/houtan-rocky/uniswap-widget/tree/main/examples/basic/api) (Vercel functions) for a working reference.
 
 ### 3. Vite-style env
 
