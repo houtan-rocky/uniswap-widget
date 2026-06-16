@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Vite writes a temp config file during build
+*.timestamp-*.mjs
+
+# npm/pnpm pack output
+*.tgz
+
 # Environment variables
 .env
 .env.local

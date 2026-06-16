@@ -8,7 +8,7 @@ import {
   type TokenInfo,
 } from "@uniswap-widget/core";
 import { createWidgetState } from "../composables/state";
-import { useWallet } from "../composables/useWallet";
+import { useWallet } from "../wallet/context";
 import { useQuote } from "../composables/useQuote";
 import { useSwap } from "../composables/useSwap";
 
@@ -45,7 +45,8 @@ const theme = computed<ThemeConfig>(() => {
 });
 
 const state = createWidgetState();
-const { isConnected, getSigner, open } = useWallet();
+const { isConnected, address, getSigner, connect, disconnect, AccountButton } =
+  useWallet();
 
 useQuote({ state, poolConfig, getSigner });
 const { swap, isSwapping } = useSwap({ state, getSigner, onSwap: props.onSwap });
@@ -247,7 +248,7 @@ function tokenLogo(token: TokenInfo): string | undefined {
         backgroundColor: theme.connectButton.background,
         color: theme.connectButton.text,
       }"
-      @click="open"
+      @click="connect"
     >
       Connect Wallet
     </button>
@@ -274,9 +275,24 @@ function tokenLogo(token: TokenInfo): string | undefined {
       </div>
     </div>
 
-    <!-- Account Button -->
+    <!-- Account UI — supplied by the wallet adapter, with a minimal fallback -->
     <div v-if="isConnected" class="flex justify-center items-center mt-2">
-      <appkit-account-button />
+      <component :is="AccountButton" v-if="AccountButton" />
+      <div
+        v-else
+        class="flex items-center gap-2 text-sm"
+        :style="{ color: theme.textSecondary }"
+      >
+        <span v-if="address">{{ address.slice(0, 6) }}…{{ address.slice(-4) }}</span>
+        <button
+          v-if="disconnect"
+          class="underline"
+          :style="{ color: theme.connectButton.background }"
+          @click="disconnect"
+        >
+          Disconnect
+        </button>
+      </div>
     </div>
   </div>
 </template>

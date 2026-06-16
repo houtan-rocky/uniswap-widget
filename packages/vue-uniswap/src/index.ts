@@ -9,9 +9,16 @@
 // Components
 export { default as SwapWidget } from "./components/SwapWidget.vue";
 export { default as UniswapProvider } from "./components/UniswapProvider.vue";
+export { default as WalletAdapterProvider } from "./wallet/WalletAdapterProvider.vue";
+
+// Wallet plugin — adapter context + built-in adapters. Provide a custom adapter
+// to swap Reown AppKit for any other wallet library.
+export { useWallet, provideWallet } from "./wallet/context";
+export { useReownWalletAdapter } from "./wallet/adapters/reown";
+export { useInjectedWalletAdapter } from "./wallet/adapters/injected";
+export type { WalletConnection, WalletAdapter } from "./wallet/types";
 
 // Composables  for building custom Vue UIs on the core.
-export { useWallet } from "./composables/useWallet";
 export { useQuote } from "./composables/useQuote";
 export { useSwap } from "./composables/useSwap";
 export { createWidgetState } from "./composables/state";

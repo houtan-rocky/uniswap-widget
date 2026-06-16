@@ -1,6 +1,4 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { useAccount, useWalletClient } from "wagmi";
-import { ethers } from "ethers";
 import {
   DEFAULT_POOL_CONFIG,
   lightTheme,
@@ -10,7 +8,7 @@ import {
 } from "@uniswap-widget/core";
 import useQuote from "../hooks/useQuote";
 import useSwap from "../hooks/useSwap";
-import { useAppKit } from "@reown/appkit/react";
+import { useWallet } from "../wallet/context";
 
 const cx = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(" ");
@@ -26,22 +24,15 @@ const SwapWidget: React.FC<SwapProps> = ({
   theme: customTheme = {},
   onSwap,
 }) => {
-  const { open } = useAppKit();
-  const { isConnected } = useAccount();
-  const { data: walletClient } = useWalletClient();
+  const {
+    isConnected,
+    address,
+    signer,
+    connect,
+    disconnect,
+    AccountButton,
+  } = useWallet();
   const [isSwapping, setIsSwapping] = useState(false);
-
-  const signer = useMemo(() => {
-    if (!walletClient) return undefined;
-    const { account, chain, transport } = walletClient;
-    const network = {
-      chainId: chain.id,
-      name: chain.name,
-      ensAddress: chain.contracts?.ensRegistry?.address,
-    };
-    const provider = new ethers.providers.Web3Provider(transport, network);
-    return provider.getSigner(account.address);
-  }, [walletClient]);
 
   // Merge custom theme with default light theme
   const theme = useMemo<ThemeConfig>(
@@ -116,9 +107,7 @@ const SwapWidget: React.FC<SwapProps> = ({
   };
 
   const onConnectWallet = async () => {
-    open({
-      view: "Connect",
-    });
+    await connect();
   };
 
   return (
@@ -356,10 +345,32 @@ const SwapWidget: React.FC<SwapProps> = ({
         </div>
       )}
 
-      {/* Account Button */}
+      {/* Account UI — supplied by the wallet adapter, with a minimal fallback */}
       {isConnected && (
         <div className="flex justify-center items-center mt-2">
-          <appkit-account-button />
+          {AccountButton ? (
+            <AccountButton />
+          ) : (
+            <div
+              className="flex items-center gap-2 text-sm"
+              style={{ color: theme.textSecondary }}
+            >
+              {address && (
+                <span>
+                  {address.slice(0, 6)}…{address.slice(-4)}
+                </span>
+              )}
+              {disconnect && (
+                <button
+                  onClick={() => disconnect()}
+                  className="underline"
+                  style={{ color: theme.connectButton.background }}
+                >
+                  Disconnect
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

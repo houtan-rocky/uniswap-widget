@@ -1,4 +1,4 @@
-import { inject, onMounted, onUnmounted, ref } from "vue";
+import { h, inject, onMounted, onUnmounted, ref } from "vue";
 import { ethers } from "ethers";
 import {
   getAccount,
@@ -6,20 +6,26 @@ import {
   reconnect,
   watchAccount,
 } from "@wagmi/core";
-import { UNISWAP_WIDGET_KEY } from "../context";
+import { UNISWAP_WIDGET_KEY } from "../../context";
+import type { WalletConnection } from "../types";
+
+/** Reown AppKit's own account button web component. */
+const ReownAccountButton = {
+  name: "ReownAccountButton",
+  render: () => h("appkit-account-button"),
+};
 
 /**
- * Wallet binding for Vue.
- *
- * Tracks connection state from `@wagmi/core` and lazily adapts the connected
- * viem wallet client into an `ethers.Signer`  the exact shape the core swap
- * functions expect. This is the Vue equivalent of the React widget's
- * `useAccount` + `useWalletClient` + `Web3Provider` dance.
+ * Default Vue wallet adapter, backed by `@wagmi/core` + Reown AppKit. Reads the
+ * wagmi config + AppKit instance from `<UniswapProvider>`'s context. It is a
+ * composable — used by the default `<UniswapProvider>`.
  */
-export function useWallet() {
+export function useReownWalletAdapter(): WalletConnection {
   const ctx = inject(UNISWAP_WIDGET_KEY);
   if (!ctx) {
-    throw new Error("useWallet() must be used inside <UniswapProvider>");
+    throw new Error(
+      "useReownWalletAdapter() needs <UniswapProvider> (wagmiConfig + appKit) above it.",
+    );
   }
   const { wagmiConfig, appKit } = ctx;
 
@@ -28,13 +34,11 @@ export function useWallet() {
   const address = ref<string | undefined>(initial.address);
 
   let unwatch: (() => void) | undefined;
-
   onMounted(() => {
     // Restore a previous session if there is one.
     reconnect(wagmiConfig).catch(() => {
-      /* no previous session  fine */
+      /* no previous session — fine */
     });
-
     unwatch = watchAccount(wagmiConfig, {
       onChange(account) {
         isConnected.value = account.isConnected;
@@ -42,16 +46,11 @@ export function useWallet() {
       },
     });
   });
+  onUnmounted(() => unwatch?.());
 
-  onUnmounted(() => {
-    unwatch?.();
-  });
-
-  /** Resolve the connected wallet as an ethers signer (or undefined). */
   async function getSigner(): Promise<ethers.Signer | undefined> {
     const walletClient = await getWalletClient(wagmiConfig).catch(() => null);
     if (!walletClient) return undefined;
-
     const { account, chain, transport } = walletClient;
     const network = {
       chainId: chain.id,
@@ -62,10 +61,11 @@ export function useWallet() {
     return provider.getSigner(account.address);
   }
 
-  /** Open the AppKit connect modal. */
-  function open() {
-    void appKit.open({ view: "Connect" });
-  }
-
-  return { isConnected, address, getSigner, open };
+  return {
+    isConnected,
+    address,
+    getSigner,
+    connect: () => void appKit.open({ view: "Connect" }),
+    AccountButton: ReownAccountButton,
+  };
 }

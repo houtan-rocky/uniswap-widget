@@ -61,6 +61,10 @@
     "viem": ">=2.0.0",
     "vue": ">=3.4.0"
   },
+  "peerDependenciesMeta": {
+    "@reown/appkit": { "optional": true },
+    "@reown/appkit-adapter-wagmi": { "optional": true }
+  },
   "devDependencies": {
     "@reown/appkit": "catalog:web3",
     "@reown/appkit-adapter-wagmi": "catalog:web3",
