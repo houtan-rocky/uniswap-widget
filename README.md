@@ -1,5 +1,10 @@
 # uniswap-widget (monorepo)
 
+[![@uniswap-widget/react](https://img.shields.io/npm/v/@uniswap-widget/react.svg?label=%40uniswap-widget%2Freact)](https://www.npmjs.com/package/@uniswap-widget/react)
+[![@uniswap-widget/vue](https://img.shields.io/npm/v/@uniswap-widget/vue.svg?label=%40uniswap-widget%2Fvue)](https://www.npmjs.com/package/@uniswap-widget/vue)
+[![@uniswap-widget/core](https://img.shields.io/npm/v/@uniswap-widget/core.svg?label=%40uniswap-widget%2Fcore)](https://www.npmjs.com/package/@uniswap-widget/core)
+[![license](https://img.shields.io/npm/l/@uniswap-widget/react.svg)](LICENSE)
+
 A pnpm monorepo for the **`@uniswap-widget`** swap widget  a framework-agnostic
 core with React and Vue bindings  and runnable examples.
 

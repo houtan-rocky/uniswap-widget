@@ -1,6 +1,6 @@
 {
   "name": "@uniswap-widget/vue",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "description": "Vue 3 Uniswap swap widget, built on @uniswap-widget/core",
   "license": "MIT",
@@ -55,7 +55,19 @@
     "widget",
     "defi",
     "vue",
-    "ethereum"
+    "ethereum",
+    "web3",
+    "dex",
+    "token-swap",
+    "base",
+    "wallet",
+    "wagmi",
+    "reown",
+    "appkit",
+    "vue3",
+    "vue-component",
+    "swap-widget",
+    "ethers"
   ],
   "dependencies": {
     "@uniswap-widget/core": "workspace:*"

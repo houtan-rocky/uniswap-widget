@@ -1,6 +1,6 @@
 {
   "name": "@uniswap-widget/react",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "type": "module",
   "description": "A clean Uniswap swap widget package for easy integration",
   "license": "MIT",
@@ -56,7 +56,19 @@
     "widget",
     "defi",
     "react",
-    "ethereum"
+    "ethereum",
+    "web3",
+    "dex",
+    "token-swap",
+    "base",
+    "wallet",
+    "wagmi",
+    "reown",
+    "appkit",
+    "react-component",
+    "react-hooks",
+    "swap-widget",
+    "ethers"
   ],
   "dependencies": {
     "@uniswap-widget/core": "workspace:*"

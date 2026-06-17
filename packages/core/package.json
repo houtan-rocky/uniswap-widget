@@ -1,6 +1,6 @@
 {
   "name": "@uniswap-widget/core",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "description": "Framework-agnostic core for the Uniswap swap widget: trading logic, types, and themes",
   "license": "MIT",
@@ -56,7 +56,13 @@
     "defi",
     "ethereum",
     "core",
-    "framework-agnostic"
+    "framework-agnostic",
+    "web3",
+    "dex",
+    "token-swap",
+    "base",
+    "ethers",
+    "blockchain"
   ],
   "peerDependencies": {
     "@uniswap/sdk-core": ">=5.0.0",

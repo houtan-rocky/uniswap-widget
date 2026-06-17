@@ -1,5 +1,9 @@
 # @uniswap-widget/react
 
+[![npm version](https://img.shields.io/npm/v/@uniswap-widget/react.svg)](https://www.npmjs.com/package/@uniswap-widget/react)
+[![npm downloads](https://img.shields.io/npm/dm/@uniswap-widget/react.svg)](https://www.npmjs.com/package/@uniswap-widget/react)
+[![license](https://img.shields.io/npm/l/@uniswap-widget/react.svg)](https://github.com/houtan-rocky/uniswap-widget/blob/main/LICENSE)
+
 <img width="581" height="546" alt="image" src="https://github.com/user-attachments/assets/b98e27cd-3a08-4a1e-a018-f12ef1cd9bba" />
 
 A React component package for easily integrating Uniswap swap functionality into your dApp with maximum dev flexibility  no token limitations, no warnings, and no added fee.

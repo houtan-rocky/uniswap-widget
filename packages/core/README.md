@@ -1,5 +1,9 @@
 # @uniswap-widget/core
 
+[![npm version](https://img.shields.io/npm/v/@uniswap-widget/core.svg)](https://www.npmjs.com/package/@uniswap-widget/core)
+[![npm downloads](https://img.shields.io/npm/dm/@uniswap-widget/core.svg)](https://www.npmjs.com/package/@uniswap-widget/core)
+[![license](https://img.shields.io/npm/l/@uniswap-widget/core.svg)](https://github.com/houtan-rocky/uniswap-widget/blob/main/LICENSE)
+
 Framework-agnostic core for the Uniswap swap widget. This package contains the
 parts that don't care which UI framework you use:
 

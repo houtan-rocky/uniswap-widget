@@ -1,5 +1,9 @@
 # @uniswap-widget/vue
 
+[![npm version](https://img.shields.io/npm/v/@uniswap-widget/vue.svg)](https://www.npmjs.com/package/@uniswap-widget/vue)
+[![npm downloads](https://img.shields.io/npm/dm/@uniswap-widget/vue.svg)](https://www.npmjs.com/package/@uniswap-widget/vue)
+[![license](https://img.shields.io/npm/l/@uniswap-widget/vue.svg)](https://github.com/houtan-rocky/uniswap-widget/blob/main/LICENSE)
+
 A Vue 3 Uniswap swap widget, built on
 [`@uniswap-widget/core`](https://github.com/houtan-rocky/uniswap-widget/tree/main/packages/core). The same trading logic that powers
 [`@uniswap-widget/react`](https://github.com/houtan-rocky/uniswap-widget/tree/main/packages/react-uniswap)  exposed as Vue components and composables.

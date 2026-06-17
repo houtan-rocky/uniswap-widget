@@ -12,6 +12,11 @@ export default defineConfig({
   base: '/uniswap-widget/',
   lastUpdated: true,
 
+  // Emit sitemap.xml so search engines can index every page (discoverability).
+  sitemap: {
+    hostname: 'https://houtan-rocky.github.io/uniswap-widget/',
+  },
+
   // The React README documents env vars in an ```env block; Shiki has no `env`
   // grammar, so map it to `ini` (KEY=value) to highlight it and silence the
   // build warning — without editing the published README.
@@ -19,7 +24,22 @@ export default defineConfig({
     languageAlias: { env: 'ini' },
   },
 
-  head: [['link', { rel: 'icon', href: '/uniswap-widget/favicon.ico' }]],
+  // Favicon + Open Graph/Twitter tags for rich link previews when shared.
+  head: [
+    ['link', { rel: 'icon', href: '/uniswap-widget/favicon.ico' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'uniswap-widget' }],
+    [
+      'meta',
+      {
+        property: 'og:description',
+        content:
+          'Embeddable Uniswap swap widget — a framework-agnostic core with React and Vue bindings.',
+      },
+    ],
+    ['meta', { property: 'og:url', content: 'https://houtan-rocky.github.io/uniswap-widget/' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+  ],
 
   themeConfig: {
     nav: [
